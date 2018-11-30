@@ -53,8 +53,10 @@ def difficulties(request):
             return render(request, 'error.html', {"reason":"Difficulté n'existe pas!"})
         techno_list = Technology.objects.filter(difficulty = difficulty, show = True)
         techno_list = getPage(request,techno_list)
-        need_list = Need.objects.filter(difficulty = difficulty)
-        technotype_list = Technotype.objects.filter(difficulty = difficulty)
+#        need_list = Need.objects.filter(difficulty = difficulty)
+#        technotype_list = Technotype.objects.filter(difficulty = difficulty)
+        technotype_list = Utils.get_typelist(techno_list)
+        need_list = Utils.get_needlist(techno_list)
     except Exception as e:
         logger.error(e)
     return render(request, 'list2.html', locals())
@@ -68,14 +70,8 @@ def needs(request):
         except Need.DoesNotExist:
             return render(request, 'error.html', {"reason":"Besoin n'existe pas!"})
         difficulty = Difficulty.objects.get(pk=did)
-        #technotype_list = Technotype.objects.filter(difficulty = difficulty)
         techno_list = Technology.objects.filter(need = need,difficulty = difficulty, show = True)
-        technotype_list = []
-        for techno in techno_list:
-            each_list = Technotype.objects.filter(technology = techno)
-            for each in each_list:
-                if not each in technotype_list:
-                    technotype_list.append(each)
+        technotype_list = Utils.get_typelist(techno_list)
         techno_list = getPage(request,techno_list) 
     except Exception as e:
         logger.error(e)
@@ -281,6 +277,26 @@ def cleanCart(request):
 
 ########################################################################################
 class Utils:
+    @staticmethod
+    def get_typelist(techno_list):
+        technotype_list = []
+        for techno in techno_list:
+            each_list = Technotype.objects.filter(technology = techno)
+            for each in each_list:
+                if not each in technotype_list:
+                    technotype_list.append(each)
+        return technotype_list
+    
+    def get_needlist(techno_list):
+        need_list = []
+        for techno in techno_list:
+            each_list = Need.objects.filter(technology = techno)
+            for each in each_list:
+                if not each in need_list:
+                    need_list.append(each)
+        return need_list
+        
+    
 
     @staticmethod
     def search_in_objects(words):
