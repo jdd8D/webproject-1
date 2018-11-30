@@ -1,0 +1,50 @@
+{% if need_list or technotype_list %} 
+<div class="choix">        
+    {% if need and technotype_list %}            
+    <h3>Type de technologie:</h3>
+        <ul>
+            {% for ty in technotype_list %}
+            <li><a href="{% url 'needs2types' %}?nid={{ need.id }}&typeid={{ ty.id }}&did={{ difficulty.id }}">{{ ty.name }}</a></li>
+            {% endfor %}               
+        </ul>                
+    {% elif need_list %}
+        <h3>J’ai besoin d’aide pour:</h3>
+        <ul>
+            {% for need in need_list %}
+            <li><a href="{% url 'needs' %}?nid={{ need.id }}&did={{ difficulty.id }}">{{ need.name }}</a></li>
+            {% endfor %}               
+        </ul>
+    </br>  
+    {% endif %}
+    
+    {% if not need and technotype_list %}
+    <h3>Type de technologie:</h3>
+        <ul>
+            {% for ty in technotype_list %}
+            <li><a href="{% url 'technotypes' %}?typeid={{ ty.id }}&did={{ difficulty.id }}">{{ ty.name }}</a></li>
+            {% endfor %}               
+        </ul>  
+    {% endif %}   
+</div>
+{% endif %} 
+
+
+
+{% comment %}
+<div class="choix">
+	<h3>Type de besoin</h3>
+	<form action="/action_page.php">
+		<input type="radio" name="need" value="besoin_1">Besoin 1<br>
+		<input type="radio" name="need" value="besoin_2">Besoin 2<br>
+		<input type="radio" name="need" value="">Besoin 3<br>
+		<input type="radio" name="need" value="">Besoin 4<br>
+	<br/>
+	<h3>Type de technologie</h3>
+		<input type="radio" name="technotype" value="type_1">Type 1<br>
+		<input type="radio" name="technotype" value="type_2">Type 2<br>
+		<input type="radio" name="technotype" value="">Type 3<br>
+		<input type="radio" name="technotype" value="">Type 4<br>
+	<br/>
+	<input name="bla" type="submit">
+</div>
+{% endcomment %}

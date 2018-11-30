@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="container">
+	<div class="register">
+		<h1>Registre</h1>
+		  	  <form action="{% url 'register' %}" method="post">
+                 {% csrf_token %}
+				 <div class="col-md-6  register-top-grid">
+					<div class="mation">
+						<span>Nom d'utilisateur</span>
+						{{ reg_form.username }}
+
+						 <span>Adresse E-mail</span>
+						 {{ reg_form.email }}
+					</div>
+					 <div class="clearfix"> </div>
+                 </div>
+                 <div class=" col-md-6 register-bottom-grid">
+                    <div class="mation">
+                        <span>Mot de passe</span>
+                        {{ reg_form.password }}
+                        <span>Confirmer le mot de passe</span>
+                        {{ reg_form.confirm_password }}
+                    </div>
+                 </div>
+                 <div class="clearfix"> </div>
+                  <div class="register-but">
+                       <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+                      <input type="submit" value="submit">
+                      <div class="clearfix"> </div>
+				  </div>
+              </form>
+    </div>
+</div>
+{% endblock %}

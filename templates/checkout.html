@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="container">
+	<div class="check-out">
+		<h1>Liste de souhaits</h1>
+    	  <table >
+		  <tr>
+			<th>Technologie</th>
+			<th>Type de technologie</th>
+			<th>Prix</th>
+		  </tr>
+          {% for item in cart.items %}
+		  <tr>
+			<td class="ring-in"><a href="{% url 'detail' %}?technoid={{ item.technology.id }}" class="at-in"><img src="{{ MEDIA_URL }}{{ item.technology.image }}" class="img-responsive" alt=""></a>
+			<div class="sed">
+				<a href="{% url 'detail' %}?technoid={{ item.technology.id }}"><h5>{{ item.technology.name }}</h5></a>
+				<p>{{ item.technology.desc}}</p>
+			</div>
+			<div class="clearfix"> </div></td>
+            <td style="text-decoration">{{ techno.get_type }}</td>
+			<td style="text-decoration">{{ item.technology.price }}</td>
+		  </tr>
+          {% endfor %}
+          <tr>
+          <td><a href="{% url 'clean_cart' %}" class=" to-buy">Vider la liste de souhaits</a>
+            </td>
+          </tr>
+	</table>
+	<div class="clearfix"> </div>
+    </div>
+</div>
+{% endblock %}
+

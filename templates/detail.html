@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="single">
+
+<div class="container">
+<div class="col-md-9">
+	<div class="col-md-5 grid">		
+		<div class="flexslider">
+			  <ul class="slides">
+			    <li data-thumb="{{ MEDIA_URL }}{{ techno.image }}">
+			        <div class="thumb-image"> <img src="{{ MEDIA_URL }}{{ techno.image }}" data-imagezoom="true" class="img-responsive"> </div>
+			    </li>
+			    <li data-thumb="{{ MEDIA_URL }}{{ techno.image }}">
+			         <div class="thumb-image"> <img src="{{ MEDIA_URL }}{{ techno.image }}" data-imagezoom="true" class="img-responsive"> </div>
+			    </li>
+			    <li data-thumb="{{ MEDIA_URL }}{{ techno.image }}">
+			       <div class="thumb-image"> <img src="{{ MEDIA_URL }}{{ techno.image }}" data-imagezoom="true" class="img-responsive"> </div>
+			    </li> 
+			  </ul>
+		</div>
+	</div>	
+<div class="col-md-7 single-top-in">
+						<div class="single-para simpleCart_shelfItem">
+							<h1>{{ techno.name }}</h1>
+							<p>{{ techno.desc }}</p>
+							<div class="clearfix"> </div>
+							</br>
+							<h4>Pour les Besoins :</h4>
+    						<p> {{ techno.get_need }}</p>
+							</br>
+							<h4>Type de Technologie :</h4>
+							<p> {{ techno.get_type }}</p>
+							</br>
+							<h4>Entreprise : {{ techno.company }}</h4>
+							</br>
+							{% if techno.price  %}
+							<h4>Prix : {{ techno.price }} </h4>
+							{% else %}
+							<h4>Prix : Non renseigné</h4>
+							{% endif %}
+							</br>							
+							<h4>Liens : <a href="{{ techno.source }}"> Source internet </a>
+							</div>
+                         <form action="{% url 'add_cart'%}" method="post" id="subform{{ techno.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="techid" value="{{ techno.id }}">
+                            <a href="#" class="cart item_add" onclick="document.getElementById('subform{{ techno.id }}').submit();">Ajouter à la liste de souhaits</a>
+                         </form>
+						</div>
+					</div>
+			<div class="clearfix"> </div>
+    </br>
+	{% if techno.video %}
+    <h3>Vidéo<h3>
+    <iframe width="800" height="500"
+    src="{{ techno.video }}">
+    </iframe>
+    {% endif %}
+</div>
+<!----->
+{#        {% include 'pro_right.html' %}#}
+		<div class="clearfix"> </div>
+	</div>
+	</div>
+<!-- slide -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/imagezoom.js' %}"></script>
+<!-- start menu -->
+<link href="{% static 'css/memenu.css' %}" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="{% static 'js/memenu.js' %}"></script>
+<script>$(document).ready(function(){$(".memenu").memenu();});</script>
+<script src="{% static 'js/simpleCart.min.js' %}"> </script>
+<!--initiate accordion-->
+						<script type="text/javascript">
+							$(function() {
+							    var menu_ul = $('.menu-drop > li > ul'),
+							           menu_a  = $('.menu-drop > li > a');
+							    menu_ul.hide();
+							    menu_a.click(function(e) {
+							        e.preventDefault();
+							        if(!$(this).hasClass('active')) {
+							            menu_a.removeClass('active');
+							            menu_ul.filter(':visible').slideUp('normal');
+							            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+							        } else {
+							            $(this).removeClass('active');
+							            $(this).next().stop(true,true).slideUp('normal');
+							        }
+							    });
+							
+							});
+						</script>
+						<!-- FlexSlider -->
+  <script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+</script>
+<!---pop-up-box---->
+					<link href="{% static 'css/popuo-box.css' %}" rel="stylesheet" type="text/css" media="all"/>
+					<script src="{% static 'js/jquery.magnific-popup.js' %}" type="text/javascript"></script>
+					<!---//pop-up-box---->
+					 <script>
+						$(document).ready(function() {
+						$('.popup-with-zoom-anim').magnificPopup({
+							type: 'inline',
+							fixedContentPos: false,
+							fixedBgPos: true,
+							overflowY: 'auto',
+							closeBtnInside: true,
+							preloader: false,
+							midClick: true,
+							removalDelay: 300,
+							mainClass: 'my-mfp-zoom-in'
+						});
+																						
+						});
+				</script>
+{% endblock %}

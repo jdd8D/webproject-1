@@ -1,0 +1,61 @@
+header{
+/*	position: relative; top: 0;*/
+	max-width: 100%; /*Largeur du bandeau = largeur de la fenêtre*/
+	background-color: #0094d2; /*Couleur de fond */
+/*	text-align: left; Alignement des éléments */
+	min-height: 200px; /*Hauteur du cadre minimum*/
+	max-height: 250px; /*Hauteur de cadre maximum*/
+	font-size: 15px; /*Taille de police*/
+	color: #fff; /*Couleur du texte (blanc)*/
+	clear: both; /*N'accepte pas d'objet d'un côté ou de l'autre (ex : menu ou filtre)*/
+}
+
+nav {
+	position: relative;
+	margin: 20px;
+	float: right;
+}
+
+nav > a {
+	text-decoration: none;
+    background-color: #87c8e3;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    color: black;
+    padding: 8px 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+nav > a:hover {
+    background-color: #036d99;
+ /*   padding: 10px 10px;*/
+    font-size: 18px;
+    color: white;
+}
+
+.logo{
+	position: relative;
+	margin: 10px;
+}
+
+.titre {
+	position: relative;
+	top: -10px;
+	left: 30px;
+}
+
+.intro {
+	position: relative;
+	bottom: 20px;
+	left: 20%;
+}
+
+.rech {
+	position: relative;
+	top: -40px;
+	margin-right: 20px;
+	float: right;
+}
+

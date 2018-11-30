@@ -1,0 +1,36 @@
+diff{
+	position: relative;
+	max-width: 100%; /*Largeur du bandeau = largeur de la fenêtre*/
+	text-align: center; /*Alignement des éléments */
+	min-height: 300px; /*Hauteur du cadre minimum*/
+	max-height: 400px; /*Hauteur de cadre maximum*/
+	font-size: 15px; /*Taille de police*/
+	color: black; /*Couleur du texte (blanc)*/
+	clear: both; /*N'accepte pas d'objet d'un côté ou de l'autre (ex : menu ou filtre)*/
+}
+
+.boutons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.boutons > a {
+  background-color: grey;
+  width: 100px;
+  margin-bottom: 30px;
+  text-align: center;
+  line-height: 45px;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.boutons > a >i {
+  font-size: 30px;
+}
+
+.boutons > a:hover {
+	border: solid;
+	border-color: black;
+	border-width: 6px;
+}
+

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content_block %}
+
+<style>
+
+input[type=file] {
+  border: 1px solid #CCCCCC;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  width: 50%;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+</style>
+
+{% include 'widgets/modal_form_validation.html' %}
+
+<div class="container">
+<div class="jumbotron">
+<div class="row">
+
+<div class="col-md-9 col-md-offset-1">
+
+    <center><h1>Formulaire de soumission d'une technologie</h1></center>
+
+        <br>
+        <br>
+        <br>
+
+        <form enctype="multipart/form-data" method="post" id="subform" novalidate>
+        
+        <!--Show pop if form is valid-->
+        {% if success == 1 %}
+        <script>
+        $("#myModal").modal()
+        </script>
+        {% endif %}
+
+      {% csrf_token %}
+      {% include 'form.html' with form=form %}
+
+      <button onclick="Submit()" type="submit" class="btn btn-primary" style="font-size: 20px;">Soumettre</button>
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+
+    function Submit () {
+        document.getElementById("subform").submit();
+    }
+
+</script>
+
+ {% endblock %}

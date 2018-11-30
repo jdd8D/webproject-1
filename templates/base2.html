@@ -1,0 +1,109 @@
+<!--
+   accueil.html
+   
+   Copyright 2018 Julie <Julie@LAPTOP-86JN4I3F>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<!--xml:lang = langue pour le lecteur d'écran-->
+
+<head>
+	<title>BDAN</title>
+	<link rel="shortcut icon" href="{% static 'images/image.ico' %}>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css2/body.css' %}">
+	<link rel="stylesheet" href="{% static 'css2/header.css' %}">
+	<link rel="stylesheet" href="{% static 'css2/diff.css' %}">
+	<link rel="stylesheet" href="{% static 'css2/choix.css' %}">
+	<link rel="stylesheet" href="{% static 'css2/techno.css' %}">
+	<link rel="stylesheet" href="{% static 'css2/footer.css' %}">
+	<link rel="stylesheet" href="{% static 'css2/memenu.css' %}">
+</head>
+
+<body>
+
+<header>
+	<img class="logo" alt="logo du site, retour vers l'accueil" title="Accueil" width="70" src="{% static 'images/image.png' %}">
+	<nav class="menu">
+		<a href="{% url 'index' %}"><i class="fas fa-home"></i>Accueil</a>
+		<a href="{% url 'subform' %}"><i class="fas fa-upload"></i> Soumettre une technologie</a>
+		<a href="{% url 'about' %}"><i class="fas fa-child"></i> A propos</a>
+		<a href="{% url 'contact' %}"><i class="fas fa-paper-plane"i></i> Contact</a>
+		<a href="page_aide"><i class="fas fa-question-circle"></i> Aide</a>
+		<a href="page_paramettres"><i class="fas fa-cog"></i> Paramètres</a>
+	</nav>
+	<h1 class="titre">Banque de donnée d'assistance numérique</h1>
+	
+<!--fonction de recherche-->
+
+	<form class="rech" role="search" method="get" id="searchform" action="{% url 'search' %}">
+    	{% csrf_token %}
+		<input type="search" name="q"  placeholder="Recherche..."><button type="submit"><i class="fa fa-search"></i></button>
+	</form>
+	<p class="intro">Notre site vous propose un ensemble de technologies<br />qui vous accompagnent tout au long de votre vie.</p>
+</header>
+
+<div class="diff">
+	<h5><a href="{% url 'index' %}">Accueil</a></h5>
+	<h2>J'ai une difficulté :</h2>
+	<div class="boutons">
+    	{% for diff in difficulty_list %}
+        {% csrf_token %}
+		<a style="background-color:couleur" alt="name of difficulty" href="{% url 'difficulties' %}?did={{ diff.id }}"><i class="fas fa-home"></i></br>{{ diff.name }}</a>
+        {% endfor %}
+    </div>
+    
+    
+    {% comment %}
+		<a style="background-color:red" id="" alt="à manger" href="nom_page"><i class="fas fa-utensils"></i></br>Manger</a>
+		<a style="background-color:green" id="" alt="nom difficulté" href="nom_page"><i class="fas fa-home"></i></br>Nom difficulté</a>
+		<a style="background-color:blue" id="" alt="nom difficulté" href="nom_page"><i class="fas fa-home"></i></br>Nom difficulté</a>
+		<a style="background-color:pink" id="" alt="à manger" href="nom_page"><i class="fas fa-utensils"></i></br>Manger</a>
+	</div>
+	<div class="boutons">
+		<a style="background-color:purple" id="" alt="à manger" href="nom_page"><i class="fas fa-utensils"></i></br>Manger</a>
+		<a style="background-color:green" id="" alt="nom difficulté" href="nom_page"><i class="fas fa-home"></i></br>Nom difficulté</a>
+		<a style="background-color:orange" id="" alt="nom difficulté" href="nom_page"><i class="fas fa-home"></i></br>Nom difficulté</a>
+		<a style="background-color:black" id="" alt="à manger" href="nom_page"><i class="fas fa-utensils"></i></br>Manger</a>
+		<a style="background-color:couleur" id="" alt="nom difficulté" href="nom_page"><i class="fas fa-home"></i></br>Nom difficulté</a>
+	</div>
+	{% endcomment %}
+</div>
+
+<!--banner-->
+<!--{% block banner_block %}{% endblock %}-->
+<!--//banner-->
+<!--content-->
+{% block content_block %}{% endblock %}
+<!--//content-->
+<!--footer-->
+<footer>
+	<div>
+		<img class="logoUB" alt="logo de l'université de Bordeaux" src="{% static 'images/logoBdx.png' %}">
+		<div class="footleft"><h3>Contact</h3><p>adresse<br />mail</p></div>
+		<div class="footright"><h3>Suivez-nous</h3><div> <a href="url..."><i class="fab fa-facebook" style="font-size:24px;"></i></a>  <a href="url..."><i class="fab fa-twitter-square" style="font-size:24px;"></i></a>  <a href="url..."><i class="fab fa-google-plus-square" style="font-size:24px;"></i></a> </div></div>
+		<div class="footmidle"><h3>Mentions légales</h3><p>ici le texte<br>correspondant<br>aux mentions légales</p></div>
+	</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<div id="pagination">
+    <ul id="pagination-flickr">
+    {% if techno_list.has_previous %}
+    <li class="previous"><a href="?page={{ techno_list.previous_page_number }}{% if request.GET.did %}&did={{ request.GET.did }}{% endif %}{% if request.GET.nid %}&nid={{ request.GET.nid }}{% endif %}">&laquo;Page précédente</a></li>
+    {% else %}
+    <li class="previous-off">&laquo;Page précédente</li>
+    {% endif %}
+     <li class="active">{{techno_list.number }}/{{ techno_list.paginator.num_pages }}</li>
+    {% if techno_list.has_next %}
+      <li class="next"><a href="?page={{ techno_list.next_page_number }}{% if request.GET.did %}&did={{ request.GET.did }}{% endif %}{% if request.GET.nid %}&nid={{ request.GET.nid }}{% endif %}">Page suivante &raquo;</a></li>
+    {% else %}
+      <li class="next-off">Page suivante&raquo;</li>
+    {% endif %}
+   </ul>
+</div>

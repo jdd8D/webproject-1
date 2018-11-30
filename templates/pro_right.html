@@ -1,0 +1,47 @@
+<div class="col-md-3 product-bottom">
+
+<div class="tag">
+
+
+
+            {% if need and technotype_list %}
+            <h3 class="cate">Type de technologie:</h3>
+            <div class="tags">
+                <ul>
+                    {% for ty in technotype_list %}
+                    <li><a href="{% url 'needs2types' %}?nid={{ need.id }}&typeid={{ ty.id }}&did={{ difficulty.id }}">{{ ty.name }}</a></li>
+                    {% endfor %}               
+                <div class="clearfix"> </div>
+                </ul>
+            </div>    
+            {% elif need_list %}
+            <h3 class="cate">J’ai besoin d’aide pour:</h3>
+            <div class="tags">
+                <ul>
+                    {% for need in need_list %}
+                    <li><a href="{% url 'needs' %}?nid={{ need.id }}&did={{ difficulty.id }}">{{ need.name }}</a></li>
+                    {% endfor %}               
+                <div class="clearfix"> </div>
+                </ul>
+            </div>
+            </br>
+            {% endif %}
+            
+            {% if not need and technotype_list %}
+            <h3 class="cate">Type de technologie:</h3>
+            <div class="tags">
+                <ul>
+                    {% for ty in technotype_list %}
+                    <li><a href="{% url 'technotypes' %}?typeid={{ ty.id }}&did={{ difficulty.id }}">{{ ty.name }}</a></li>
+                    {% endfor %}               
+                <div class="clearfix"> </div>
+                </ul>
+            </div>
+            {% endif %}   
+            
+        
+
+    
+    
+    
+</div>

@@ -1,0 +1,127 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assistant Technology</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />  
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Fashion Mania Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- start menu -->
+    <link href="{% static 'css/memenu.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="{% static 'js/memenu.js' %}"></script>
+    <script>$(document).ready(function(){$(".memenu").memenu();});</script>
+    <script src="{% static 'js/simpleCart.min.js' %}"> </script>
+    <!-- slide -->
+    <script src="{% static 'js/responsiveslides.min.js' %}"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true
+            });
+        });
+    </script>
+</head>
+<body>
+<!--header-->
+<div class="header">
+<div class="header-top">
+    <div class="container">
+        <div class="col-sm-4 world">
+            <p class="log"><a href="{% url 'about' %}">À propos</a></p>
+            <p class="log"><a href="{% url 'contact' %}">Contact</a></p>         
+        </div>
+        <div class="col-sm-4 logo">
+            <a href={% url 'index' %}><img src="{% static 'images/AT.jpg' %}" alt=""></a>
+        </div>
+
+        <div class="col-sm-4 header-left">
+            {% if not request.user.is_authenticated %}
+                <p class="log"><a href="{% url 'login' %}"  >log in</a>
+                <span>|</span>
+                <a  href="{% url 'register' %}"  >registre</a></p>
+            {% else %}
+                <p class="log"><a href="#"  >{{ request.user.username }}</a>
+                <span>|</span>
+                <a  href="{% url 'logout' %}"  >log out</a></p>
+            {% endif %}
+            <div class="cart box_1">
+                <a href="{% url 'view_cart' %}">
+                    <h3>
+                        <div class="total">
+                            {% if request.user.is_authenticated %}
+                                {% if cart.items %}
+                                    <span>{{ cart.length }}</span>
+                                {% else %}
+                                    <span>0</span>
+                                {% endif %}
+                            {% else %}
+                                <span>0</span>
+                            {% endif %}
+                        </div>
+                        <img src="{% static 'images/voeu.png' %}" alt=""/></h3>
+                </a>
+                <p><a href="{% url 'view_cart' %}" class="simpleCart_empty">Voir la liste de souhaits</a></p> 
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>  
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<div class="container">
+    <div class="head-top">
+        <div class="col-sm-2 number">
+        </div>
+        <div class="col-sm-8 h_menu4">
+            <ul class="memenu skyblue">
+                <li class=" grid"><a  href="{% url 'index' %}">Accueil</a></li>
+                <li class=" grid"><a href="{% url 'subform' %}">Soumettre une technologie</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-2 search">
+            <div class="search-test">
+                <span class="fa fa-search"></span>
+        
+                <form role="search" method="get" id="searchform" action="{% url 'search' %}">
+                  {% csrf_token %}
+                  <input class="form-control"  type="search" name="q" placeholder="Rechercher une technologie" required>
+                  <button type="submit"><i class="glyphicon glyphicon-search"> </i></button>
+                </form>
+                
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+        <!---->
+    </div>
+</div>
+</div>
+<!--banner-->
+<!--{% block banner_block %}{% endblock %}-->
+<!--//banner-->
+<!--content-->
+{% block content_block %}{% endblock %}
+<!--//content-->
+<!--footer-->
+<div class="footer">
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="clearfix"> </div>
+            <p class="footer-class">Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="https://www.u-bordeaux.fr/">Université de Bordeaux</a></p>
+        </div>
+    </div>
+</div>
+<!--//footer-->
+</body>
+</html>

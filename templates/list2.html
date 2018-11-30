@@ -1,0 +1,39 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+{% block content_block %}  
+<div class="techno">
+    {% if technotype and need %}
+    	<h5>Accueil > Difficulté:{{ difficulty.name }}→ Besoin:{{ need.name }}→ Type:{{ technotype.name }}</h5>
+	{% elif technotype %}
+        <h5>Accueil > Difficulté:{{ difficulty.name }}→ Type:{{ technotype.name }}</h5>
+	{% elif need %}
+        <h5>Accueil > Difficulté:{{ difficulty.name }}→ Besoin:{{ need.name }}</h5>
+    {% elif difficulty %}
+		<h5>Accueil > Difficulté:{{ difficulty.name }}</h5>      
+    {% elif q %}
+        <h5><b> {{ n_results }} </b> résultat(s) pour : <b> {{ q }} </b>. </h5>  
+    {% endif %}
+    	
+	{% if techno_list %}	       
+        <div class="tech">
+        {% for techno in techno_list %}
+			<a href="{% url 'detail' %}?technoid={{ techno.id }}">
+			<img src="{{ MEDIA_URL }}{{ techno.image}}" alt= "discription" style = "max-width:200px;max-height:100px;" >
+			<h4>{{ techno.name }}</h4>
+			{% if techno.get_need %}
+            <h4>Pour les Besoins :</h4>
+            <p>{{ techno.get_need }}</p>
+            {% endif %}
+            <h4>Type de Technologie :</h4>
+            <p>{{ techno.get_type }}</p>
+            <h4>Prix: {{ techno.price }}</h4>					
+			</a>		
+        {% endfor %}
+        </div>
+    {% else %}
+        <h5>Technologie n'existe pas! </h5>
+    {% endif %}
+	<a href="{% url 'index' %}"><button class="nouvrech">Nouvelle recherche</button></a>
+</div>
+{% include 'pro_right2.html' %}
+{% endblock %}

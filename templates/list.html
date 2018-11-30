@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content_block %}
+    <div class="products">
+	<div class="container">
+    	{% if technotype and need %}
+        	<h1>Difficulté:{{ difficulty.name }}→ Besoin:{{ need.name }}→ Type:{{ technotype.name }}</h1>
+        {% elif need %}
+            <h1>Difficulté:{{ difficulty.name }}→ Besoin:{{ need.name }}</h1>
+    	{% elif technotype %}
+            <h1>Difficulté:{{ difficulty.name }}→ Type:{{ technotype.name }}</h1>
+        {% elif difficulty %}
+		    <h1>Difficulté:{{ difficulty.name }}</h1>       
+        {% elif q %}
+            <h1><b> {{ n_results }} </b> résultat(s) pour : <b> {{ q }} </b>. </h1>  
+        {% endif %}
+        
+		<div class="col-md-9">
+			<div class="content-top1">
+                {% if techno_list %}
+                    {% for techno in techno_list %}
+                    <div class="col-md-4 col-md3">
+                        <div class="col-md1 simpleCart_shelfItem">
+                            <a href="{% url 'detail' %}?technoid={{ techno.id }}">
+                                <img class="img-responsive" src="{{ MEDIA_URL }}{{ techno.image }}" alt="" /></a>                           
+                            <h3><a href="{% url 'detail' %}?technoid={{ techno.id }}">{{ techno.name }}</a></h3>
+                            <p>{{ techno.desc }}</p>
+                            </br>
+                            {% if techno.get_need %}
+                            <h4>Pour les Besoins :</h4>
+                            <p>{{ techno.get_need }}</p>
+                            {% endif %}
+                            <h4>Type de Technologie :</h4>
+                            <p>{{ techno.get_type }}</p>  
+                            </br>
+                            <div class="price">
+                                    <h5 class="item_price">{{ techno.price }}</h5>
+                                    <div class="clearfix"> </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <h2>Technologie n'existe pas! </h2>
+                {% endif %}
+			    <div class="clearfix"> </div>
+            {% include 'pagination.html' %}
+			</div>
+		</div>
+        {% include 'pro_right.html' %}
+		<div class="clearfix"> </div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="content">
+    <div class="container">        
+        <div class="content-top">
+            <h1>J'ai des difficultés au niveau de:</h1>
+            <div class="content-top1">
+                {% for diff in difficulty_list %}
+                {% csrf_token %}
+                <div class="col-md-3 col-md2">
+                        <div class="col-md1 simpleCart_shelfItem">
+                            <h3><a href="{% url 'difficulties' %}?did={{ diff.id }}">{{ diff.name }}</a></h3>
+                                    <div class="clearfix"> </div>
+                        </div>
+                </div>
+                {% endfor %}
+            <div class="clearfix"> </div>
+            </div>
+            </br>
+            <h1>List de Technologie</h1>
+            <div class="content-top1">
+                {% for techno in techno_list %}
+                {% csrf_token %}
+                <div class="col-md-3 col-md2">
+                        <div class="col-md1 simpleCart_shelfItem">
+                            <a href="{% url 'detail' %}?technoid={{ techno.id }}">
+                                <img class="img-responsive" src="{{ MEDIA_URL }}{{ techno.image }}" alt="" />
+                            </a>
+                            <h3><a href="{% url 'detail' %}?technoid={{ techno.id }}">{{ techno.name }}</a></h3>
+                            <p>{{ techno.desc }}</p>
+                            </br>
+                            {% if techno.get_need %}
+                            <h4>Pour les Besoins :</h4>
+                            <p>{{ techno.get_need }}</p>
+                            {% endif %}
+                            <h4>Type de Technologie :</h4>
+                            <p>{{ techno.get_type }}</p>
+                            </br>                           
+                            <div class="price">
+                                    <h5 class="item_price">{{ techno.price }} </h5>
+                                    <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                </div>
+                </form>
+                {% endfor %}
+            <div class="clearfix"> </div>
+            </div>
+        </div>
+    {% include 'pagination.html' %}
+    </div>
+    </div>
+    
+
+{% endblock %}
